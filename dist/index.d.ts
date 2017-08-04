@@ -1,3 +1,11 @@
+type PosisPID = string | number;
+
+interface PosisInterfaces {
+	baseKernel: IPosisKernel;
+	spawn: IPosisSpawnExtension;
+	sleep: IPosisSleepExtension;
+	coop: IPosisCooperativeScheduling;
+}
 // Bundle for programs that are logically grouped
 interface IPosisBundle<IDefaultRootMemory> {
 	// host will call that once, possibly outside of main loop, registers all bundle processes here
@@ -50,14 +58,6 @@ interface IPosisProcessRegistry {
 	// if your bundle consists of several programs you can pretend that we have a VFS: "ANI/MyBundle/BundledProgram1"
 	register(imageName: string, constructor: new (context: IPosisProcessContext) => IPosisProcess): boolean;
 }
-type PosisPID = string | number;
-
-interface PosisInterfaces {
-	baseKernel: IPosisKernel;
-	spawn: IPosisSpawnExtension;
-	sleep: IPosisSleepExtension;
-	coop: IPosisCooperativeScheduling;
-}
 interface IPosisCooperativeScheduling {
     // CPU used by process so far. Might include setup time kernel chooses to charge to the process.
     readonly used: number;
@@ -109,4 +109,31 @@ interface IPosisSpawnExtension {
         message?: string
     }
     getCreep(id: string): Creep | undefined;
+}
+interface WombatExtensionRegistry {
+  register(interfaceId: string, extension: IPosisExtension): boolean;
+
+  unregister(interfaceId: string): boolean;
+
+  getExtension(interfaceId: string): IPosisExtension | undefined;
+}
+
+interface WombatKernel extends IPosisKernel {
+  notify(pid: PosisPID, msg: any): void;
+}
+interface WombatLoggerFactory extends IPosisExtension{
+  getLogger(name: string): IPosisLogger;
+}interface WombatProcess extends IPosisProcess {
+  /** post a message to this process */
+  notify(msg: any): void;
+}
+interface WombatProcessRegistry extends IPosisProcessRegistry {
+  getNewProcess(context: IPosisProcessContext): IPosisProcess | undefined;
+}declare const enum ProcessStatus {
+  SLEEP,
+  STARTING,
+  RUNNING,
+  DONE,
+  KILLLED,
+  ERROR,
 }
