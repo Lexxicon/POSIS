@@ -123,13 +123,27 @@ interface WombatKernel extends IPosisKernel {
 }
 interface WombatLoggerFactory extends IPosisExtension{
   getLogger(name: string): IPosisLogger;
-}interface WombatProcess extends IPosisProcess {
+}
+interface WombatProcess extends IPosisProcess {
   /** post a message to this process */
   notify(msg: any): void;
 }
+interface WombatProcessInfo {
+  id: PosisPID;
+  parentId: PosisPID;
+  name: string;
+
+  status: ProcessStatus;
+  error?: string;
+
+  startTick: number;
+  wakeTick?: number;
+  endedTick?: number;
+}
 interface WombatProcessRegistry extends IPosisProcessRegistry {
   getNewProcess(context: IPosisProcessContext): IPosisProcess | undefined;
-}declare const enum ProcessStatus {
+}
+declare const enum ProcessStatus {
   SLEEP,
   STARTING,
   RUNNING,
