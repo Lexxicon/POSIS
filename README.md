@@ -1,3 +1,14 @@
+# WombatPosis
+
+Because convincing a whole community that you want a shiney isn't normally worth it
+
+## Goals
+ - Dependency Injection
+ - Standard inter process communication API
+ - Shineys
+
+# Rational things exist below
+
 # POSIS
 Portable Operating System Interface for Screeps
 
