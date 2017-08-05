@@ -130,7 +130,9 @@ interface WombatProcess extends IPosisProcess {
   /** post a message to this process */
   notify(msg: any): void;
 }
-interface WombatProcessInfo {
+interface WombatProcessConstructor extends PosisProcessConstructor{
+    new (context: IPosisProcessContext): WombatProcess | IPosisProcess;
+}interface WombatProcessInfo {
   id: PosisPID;
   parentId: PosisPID;
   name: string;
@@ -143,6 +145,7 @@ interface WombatProcessInfo {
   endedTick?: number;
 }
 interface WombatProcessRegistry extends IPosisProcessRegistry {
+	register(imageName: string, constructor: WombatProcessConstructor): boolean;
   getNewProcess(context: IPosisProcessContext): WombatProcess | undefined;
 }
 declare const enum ProcessStatus {
