@@ -1,3 +1,3 @@
 interface WombatProcessRegistry extends IPosisProcessRegistry {
-  getNewProcess(context: IPosisProcessContext): WombatProcess | IPosisProcess | undefined;
+  getNewProcess(context: IPosisProcessContext): WombatProcess | undefined;
 }
