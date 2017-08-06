@@ -1,4 +1,8 @@
 
+interface IPosisExtension {
+  wombatKernel: WombatKernel;
+}
+
 interface WombatKernel extends IPosisKernel {
   notify(pid: PosisPID, msg: any): void;
   getProcessById(pid: PosisPID): WombatProcess | undefined;
