@@ -118,7 +118,7 @@ interface WombatExtensionRegistry {
   getExtension(interfaceId: string): IPosisExtension | undefined;
 }
 
-interface IPosisExtension {
+interface PosisInterfaces {
   wombatKernel: WombatKernel;
 }
 

@@ -1,5 +1,5 @@
 
-interface IPosisExtension {
+interface PosisInterfaces {
   wombatKernel: WombatKernel;
 }
 
