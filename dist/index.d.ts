@@ -118,6 +118,10 @@ interface WombatExtensionRegistry {
   getExtension(interfaceId: string): IPosisExtension | undefined;
 }
 
+interface IPosisExtension {
+  wombatKernel: WombatKernel;
+}
+
 interface WombatKernel extends IPosisKernel {
   notify(pid: PosisPID, msg: any): void;
   getProcessById(pid: PosisPID): WombatProcess | undefined;
@@ -132,7 +136,8 @@ interface WombatProcess extends IPosisProcess {
 }
 interface WombatProcessConstructor extends PosisProcessConstructor{
     new (context: IPosisProcessContext): WombatProcess | IPosisProcess;
-}interface WombatProcessInfo {
+}
+interface WombatProcessInfo {
   id: PosisPID;
   parentId: PosisPID;
   name: string;
@@ -145,7 +150,7 @@ interface WombatProcessConstructor extends PosisProcessConstructor{
   endedTick?: number;
 }
 interface WombatProcessRegistry extends IPosisProcessRegistry {
-	register(imageName: string, constructor: WombatProcessConstructor): boolean;
+  register(imageName: string, constructor: WombatProcessConstructor): boolean;
   getNewProcess(context: IPosisProcessContext): WombatProcess | undefined;
 }
 declare const enum ProcessStatus {
