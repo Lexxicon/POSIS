@@ -1,5 +1,5 @@
 interface PosisInterfaces {
-  wombatExtensionRegistry: WombatExtensionRegistry;
+ extensionRegistry: WombatExtensionRegistry;
 }
 
 interface WombatExtensionRegistry extends IPosisExtension {

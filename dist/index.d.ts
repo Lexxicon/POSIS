@@ -111,7 +111,7 @@ interface IPosisSpawnExtension {
     getCreep(id: string): Creep | undefined;
 }
 interface PosisInterfaces {
-  wombatExtensionRegistry: WombatExtensionRegistry;
+ extensionRegistry: WombatExtensionRegistry;
 }
 
 interface WombatExtensionRegistry extends IPosisExtension {
