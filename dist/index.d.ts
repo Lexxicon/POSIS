@@ -138,8 +138,12 @@ interface WombatMessage {
     type: keyof Messages;
 }
 
+interface InteruptMessage extends WombatMessage{
+    info: string;
+}
+
 interface Messages{
-    interupt: WombatMessage
+    interupt: InteruptMessage
 }
 interface WombatProcess extends IPosisProcess {
   /** post a message to this process */
