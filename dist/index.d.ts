@@ -139,7 +139,7 @@ interface WombatMessage {
 }
 
 interface Messages{
-    interupt
+    interupt: WombatMessage
 }
 interface WombatProcess extends IPosisProcess {
   /** post a message to this process */

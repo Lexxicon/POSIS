@@ -3,5 +3,5 @@ interface WombatMessage {
 }
 
 interface Messages{
-    interupt
+    interupt: WombatMessage
 }
