@@ -3,9 +3,9 @@ interface PosisInterfaces {
 }
 
 interface WombatExtensionRegistry extends IPosisExtension {
-  register(interfaceId: string, extension: IPosisExtension): boolean;
+  register(interfaceId: keyof PosisInterfaces, extension: IPosisExtension): boolean;
 
-  unregister(interfaceId: string): boolean;
+  unregister(interfaceId: keyof PosisInterfaces): boolean;
 
-  getExtension(interfaceId: string): IPosisExtension | undefined;
+  getExtension(interfaceId: keyof PosisInterfaces): IPosisExtension | undefined;
 }

@@ -115,11 +115,11 @@ interface PosisInterfaces {
 }
 
 interface WombatExtensionRegistry extends IPosisExtension {
-  register(interfaceId: string, extension: IPosisExtension): boolean;
+  register(interfaceId: keyof PosisInterfaces, extension: IPosisExtension): boolean;
 
-  unregister(interfaceId: string): boolean;
+  unregister(interfaceId: keyof PosisInterfaces): boolean;
 
-  getExtension(interfaceId: string): IPosisExtension | undefined;
+  getExtension(interfaceId: keyof PosisInterfaces): IPosisExtension | undefined;
 }
 
 interface PosisInterfaces {
@@ -127,16 +127,23 @@ interface PosisInterfaces {
 }
 
 interface WombatKernel extends IPosisKernel {
-  notify(pid: PosisPID, msg: any): void;
+  notify(pid: PosisPID, msg: WombatMessage): void;
   getProcessById(pid: PosisPID): WombatProcess | undefined;
   startProcess(imageName: string, startContext: any): { pid: PosisPID; process: WombatProcess; } | undefined 
 }
 interface WombatLoggerFactory extends IPosisExtension{
   getLogger(name: string): IPosisLogger;
 }
+interface WombatMessage {
+    type: keyof Messages;
+}
+
+interface Messages{
+    interupt
+}
 interface WombatProcess extends IPosisProcess {
   /** post a message to this process */
-  notify(msg: any): void;
+  notify(msg: WombatMessage): void;
 }
 interface WombatProcessConstructor extends PosisProcessConstructor{
     new (context: IPosisProcessContext): WombatProcess | IPosisProcess;
@@ -164,4 +171,12 @@ declare const enum ProcessStatus {
   DONE,
   KILLLED,
   ERROR,
+}
+interface PosisInterfaces {
+    wombatSleepExtension: WombatSleepExtension;
+}
+
+interface WombatSleepExtension extends IPosisSleepExtension{
+    // puts currently running process to sleep for a given number of ticks
+    sleep(ticks: number, pid?: PosisPID): void;
 }
